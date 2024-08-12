@@ -52,14 +52,13 @@ class MainActivity : ComponentActivity() {
                         .serverUrl("https://countries.trevorblades.com/graphql")
                         .build()
 
-                    // Execute the query within a coroutine
                     LaunchedEffect(Unit) {
                         CoroutineScope(Dispatchers.IO).launch {
                             try {
                                 val response: ApolloResponse<CountryQuery.Data> = apolloClient.query(CountryQuery()).execute()
                                 val resultCountries = response.data?.countries
                                 resultCountries?.let {
-                                    countries.addAll(it.filterNotNull())
+                                    countries.addAll(it)
                                 }
                             } catch (e: Exception) {
                                 Log.e("ApolloQuery", "Query failed", e)
@@ -67,7 +66,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    // Display the list of countries
                     CountryList(countries = countries, modifier = Modifier.padding(innerPadding))
                 }
             }
