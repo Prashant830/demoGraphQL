@@ -1,0 +1,8 @@
+query Country {
+    countries {
+        name
+        code
+        emoji
+        phone
+    }
+}
