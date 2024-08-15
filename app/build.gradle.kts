@@ -80,6 +80,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+    implementation(libs.koin.core)
+
 // For logging requests and responses
 
 
