@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -20,6 +21,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -32,6 +35,7 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.ApolloResponse
 import com.example.newjetpackpoc.ui.theme.NewJetpackPocTheme
 import com.poc.CountryQuery
+import com.poc.newjetpackpoc.networklayer.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,33 +43,16 @@ import kotlinx.coroutines.runBlocking
 
 class MainActivity : ComponentActivity() {
 
+    private val viewModel: CountryViewModel by viewModels {
+        CountryViewModelFactory(Repository())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
             NewJetpackPocTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val countries = remember { mutableStateListOf<CountryQuery.Country>() }
-
-                    // Create a client
-                    val apolloClient = ApolloClient.Builder()
-                        .serverUrl("https://countries.trevorblades.com/graphql")
-                        .build()
-
-                    LaunchedEffect(Unit) {
-                        CoroutineScope(Dispatchers.IO).launch {
-                            try {
-                                val response: ApolloResponse<CountryQuery.Data> = apolloClient.query(CountryQuery()).execute()
-                                val resultCountries = response.data?.countries
-                                resultCountries?.let {
-                                    countries.addAll(it)
-                                }
-                            } catch (e: Exception) {
-                                Log.e("ApolloQuery", "Query failed", e)
-                            }
-                        }
-                    }
-
+                    val countries by viewModel.countries.observeAsState(emptyList())
                     CountryList(countries = countries, modifier = Modifier.padding(innerPadding))
                 }
             }
