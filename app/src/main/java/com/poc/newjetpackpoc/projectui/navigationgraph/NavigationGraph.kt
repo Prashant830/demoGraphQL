@@ -32,6 +32,7 @@ import com.poc.newjetpackpoc.projectui.CountryViewModel
 const val TAG = "NavGraph"
 
 
+// first Screen and it's components
 @Composable
 fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier , countryViewModel:CountryViewModel) {
 
@@ -44,7 +45,6 @@ fun ProfileScreen(navController: NavController, modifier: Modifier = Modifier , 
     }
 }
 
-
 @Composable
 fun CountryList(countries: List<CountryQuery.Country>, modifier: Modifier = Modifier, navController: NavController) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
@@ -53,7 +53,6 @@ fun CountryList(countries: List<CountryQuery.Country>, modifier: Modifier = Modi
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -87,6 +86,7 @@ fun CountryItem(country: CountryQuery.Country, navController: NavController) {
 }
 
 
+// Second Screen and it's components
 @Composable
 fun SettingsScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column {
@@ -102,6 +102,8 @@ fun SettingsScreen(navController: NavController, modifier: Modifier = Modifier) 
         }
 }
 
+
+// Third Screen and it's components
 @Composable
 fun NotificationScreen(navController: NavController, modifier: Modifier = Modifier) {
     Column {
@@ -119,6 +121,7 @@ fun NotificationScreen(navController: NavController, modifier: Modifier = Modifi
 }
 
 
+// navigation graph
 @Composable
 fun App( modifier: Modifier = Modifier , viewModel: CountryViewModel){
     val navController =  rememberNavController()
