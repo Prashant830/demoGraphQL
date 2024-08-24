@@ -68,7 +68,6 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    implementation("com.apollographql.apollo:apollo-runtime:4.0.0")
     implementation(libs.androidx.monitor)
     implementation(libs.androidx.junit.ktx)
     implementation(libs.androidx.runtime.livedata)
@@ -79,10 +78,22 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
-    implementation(libs.koin.core)
 
-// For logging requests and responses
+    // apollo manager 
+    implementation("com.apollographql.apollo:apollo-runtime:4.0.0")
+
+    // okhttp client
+    implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
+
+    // navigation graph
+    val navVersion = "2.7.7"
+    implementation("androidx.navigation:navigation-compose:$navVersion")
+
+    // koin, viewmodel implementation
+    val koinVersion = "4.0.0-RC1"
+    implementation("io.insert-koin:koin-android:$koinVersion")
+//    implementation("io.insert-koin:koin-androidx-viewmodel:$koinVersion")
+//    implementation("io.insert-koin:koin-androidx-scope:$koinVersion")
 
 
 }

@@ -36,24 +36,24 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.ApolloResponse
 import com.example.newjetpackpoc.ui.theme.NewJetpackPocTheme
 import com.poc.CountryQuery
-import com.poc.newjetpackpoc.di.ProjectComponents
 import com.poc.newjetpackpoc.networklayer.Repository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val components = ProjectComponents();
+    private val countryViewModel: CountryViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NewJetpackPocTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val countries by components.viewModel.countries.observeAsState(emptyList())
-                    CountryList(countries = countries, modifier = Modifier.padding(innerPadding))
+                    val countries by countryViewModel.countries.observeAsState()
+                    countries?.let { CountryList(countries = it, modifier = Modifier.padding(innerPadding)) }
                 }
             }
         }
