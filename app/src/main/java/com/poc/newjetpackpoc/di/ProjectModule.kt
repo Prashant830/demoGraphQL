@@ -37,6 +37,10 @@ val apolloClient: ApolloClient by lazy {
 // all classes declaration
 val projectModule = module {
     single { apolloClient }
+
+    // here apolloClient is injected in repository so didn't need to add @inject
     single { Repository(get()) }
+
+    // same with viewmodel is injected in CountryViewModel so didn't need to add @inject
     viewModel { CountryViewModel(get()) }
 }
