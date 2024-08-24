@@ -92,8 +92,7 @@ dependencies {
     // koin, viewmodel implementation
     val koinVersion = "4.0.0-RC1"
     implementation("io.insert-koin:koin-android:$koinVersion")
-//    implementation("io.insert-koin:koin-androidx-viewmodel:$koinVersion")
-//    implementation("io.insert-koin:koin-androidx-scope:$koinVersion")
+
 
 
 }

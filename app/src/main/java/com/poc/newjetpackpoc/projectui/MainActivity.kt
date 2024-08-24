@@ -1,6 +1,7 @@
 package com.poc.newjetpackpoc.projectui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.newjetpackpoc.ui.theme.NewJetpackPocTheme
 import com.poc.CountryQuery
+import com.poc.newjetpackpoc.projectui.navigationgraph.App
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -37,45 +39,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             NewJetpackPocTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val countries by countryViewModel.countries.observeAsState()
-                    countries?.let { CountryList(countries = it, modifier = Modifier.padding(innerPadding)) }
+                    App(modifier = Modifier.padding(innerPadding) , countryViewModel)
+
                 }
-            }
-        }
-    }
-
-    @Composable
-    fun CountryList(countries: List<CountryQuery.Country>, modifier: Modifier = Modifier) {
-        LazyColumn(modifier = modifier.fillMaxSize()) {
-            items(countries) { country ->
-                CountryItem(country = country)
-            }
-        }
-    }
-
-    @Composable
-    fun CountryItem(country: CountryQuery.Country) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp),
-            elevation = CardDefaults.cardElevation(4.dp),
-            colors = CardDefaults.cardColors(containerColor = Color.White),
-            shape = MaterialTheme.shapes.medium
-        ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Text(
-                    text = country.name,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = "Code: ${country.code}, Emoji: ${country.emoji}, Phone: ${country.phone}",
-                    fontSize = 14.sp,
-                    color = Color.DarkGray
-                )
             }
         }
     }
