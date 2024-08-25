@@ -14,13 +14,14 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : ComponentActivity() {
 
     private val countryViewModel: CountryViewModel by viewModel()
+    private val postViewModel: PostViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             NewJetpackPocTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    App(modifier = Modifier.padding(innerPadding) , countryViewModel)
+                    App(modifier = Modifier.padding(innerPadding) , countryViewModel , postViewModel)
                 }
             }
         }

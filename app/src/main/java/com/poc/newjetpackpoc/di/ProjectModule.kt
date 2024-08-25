@@ -1,18 +1,16 @@
 package com.poc.newjetpackpoc.di
 
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.network.http.LoggingInterceptor
 import com.apollographql.apollo.network.okHttpClient
 import com.poc.newjetpackpoc.projectui.CountryViewModel
 import com.poc.newjetpackpoc.networklayer.Repository
+import com.poc.newjetpackpoc.projectui.PostViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.viewModel
-import org.koin.core.scope.get
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.math.sin
 
 private const val BASE_URL = "https://countries.trevorblades.com/graphql"
 private const val BASE_URL_TWO = "https://jsonplaceholder.typicode.com"
@@ -77,4 +75,6 @@ val projectModule = module {
 
     // same with viewmodel is injected in CountryViewModel so didn't need to add @inject
     viewModel { CountryViewModel(get()) }
+    viewModel { PostViewModel(get()) }
+
 }

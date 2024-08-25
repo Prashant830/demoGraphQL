@@ -28,9 +28,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.poc.CountryQuery
 import com.poc.newjetpackpoc.projectui.CountryViewModel
+import com.poc.newjetpackpoc.projectui.PostViewModel
 
 const val TAG = "NavGraph"
-
 
 // first Screen and it's components
 @Composable
@@ -88,9 +88,11 @@ fun CountryItem(country: CountryQuery.Country, navController: NavController) {
 
 // Second Screen and it's components
 @Composable
-fun SettingsScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun SettingsScreen(navController: NavController , postViewModel: PostViewModel) {
+    val countries by postViewModel.post.observeAsState()
+
     Column {
-        Text("Settings Screen")
+        Text("Settings Screen ${countries?.get(1)}")
 
         Spacer(modifier = Modifier.fillMaxWidth())
 
@@ -123,16 +125,16 @@ fun NotificationScreen(navController: NavController, modifier: Modifier = Modifi
 
 // navigation graph
 @Composable
-fun App( modifier: Modifier = Modifier , viewModel: CountryViewModel){
+fun App( modifier: Modifier = Modifier , viewModel: CountryViewModel , postViewModel: PostViewModel){
     val navController =  rememberNavController()
 
     NavHost(navController =navController, startDestination = "Profile" ){
         composable("Profile") {
-            ProfileScreen(navController , modifier , viewModel)
+            ProfileScreen(navController, modifier, viewModel)
         }
 
         composable("Settings") {
-            SettingsScreen(navController)
+            SettingsScreen(navController , postViewModel)
         }
 
         composable("Notification") {
