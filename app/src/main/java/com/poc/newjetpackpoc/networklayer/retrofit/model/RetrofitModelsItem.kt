@@ -1,4 +1,4 @@
-package com.poc.newjetpackpoc.networklayer.graphqueries.model
+package com.poc.newjetpackpoc.networklayer.retrofit.model
 
 data class RetrofitModelsItem(
     val body: String,

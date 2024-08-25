@@ -1,6 +1,6 @@
-package com.poc.newjetpackpoc.networklayer.graphqueries
+package com.poc.newjetpackpoc.networklayer.retrofit
 
-import com.poc.newjetpackpoc.networklayer.graphqueries.model.RetrofitModels
+import com.poc.newjetpackpoc.networklayer.retrofit.model.RetrofitModels
 import retrofit2.Response
 import retrofit2.http.GET
 
