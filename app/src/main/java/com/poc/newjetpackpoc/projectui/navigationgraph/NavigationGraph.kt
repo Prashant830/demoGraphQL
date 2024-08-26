@@ -100,14 +100,14 @@ fun SettingsScreen(navController: NavController , postViewModel: PostViewModel) 
             navController.navigate("Notification")
         }) {
         Text("Go to Notification Screen")
+       }
     }
-        }
 }
 
 
 // Third Screen and it's components
 @Composable
-fun NotificationScreen(navController: NavController, modifier: Modifier = Modifier) {
+fun NotificationScreen(navController: NavController, modifier: Modifier = Modifier)  {
     Column {
 
         Text("Notification Screen")
@@ -118,19 +118,19 @@ fun NotificationScreen(navController: NavController, modifier: Modifier = Modifi
             navController.navigate("Profile")
         }) {
         Text("Go to Profile Screen")
-      }
+        }
     }
 }
 
 
 // navigation graph
 @Composable
-fun App( modifier: Modifier = Modifier , viewModel: CountryViewModel , postViewModel: PostViewModel){
+fun App( modifier: Modifier = Modifier , countryViewModel: CountryViewModel , postViewModel: PostViewModel){
     val navController =  rememberNavController()
 
     NavHost(navController =navController, startDestination = "Profile" ){
         composable("Profile") {
-            ProfileScreen(navController, modifier, viewModel)
+            ProfileScreen(navController, modifier, countryViewModel)
         }
 
         composable("Settings") {
@@ -142,5 +142,4 @@ fun App( modifier: Modifier = Modifier , viewModel: CountryViewModel , postViewM
         }
 
     }
-
 }
