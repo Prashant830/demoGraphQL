@@ -65,7 +65,7 @@ fun CountryItem(country: CountryQuery.Country, navController: NavController) {
         colors = CardDefaults.cardColors(containerColor = Color.White),
         shape = MaterialTheme.shapes.medium,
         onClick = {
-            navController.navigate("Settings")
+            navController.navigate("Settings/settingData-123456")
         }
     ) {
         Column(modifier = Modifier.padding(16.dp)) {
@@ -88,16 +88,16 @@ fun CountryItem(country: CountryQuery.Country, navController: NavController) {
 
 // Second Screen and it's components
 @Composable
-fun SettingsScreen(navController: NavController , postViewModel: PostViewModel) {
+fun SettingsScreen(navController: NavController , postViewModel: PostViewModel , settingParam: String) {
     val countries by postViewModel.post.observeAsState()
 
     Column {
-        Text("Settings Screen ${countries?.get(1)}")
+        Text("Settings $settingParam Screen ${countries?.get(1)}")
 
         Spacer(modifier = Modifier.fillMaxWidth())
 
         Button(onClick = {
-            navController.navigate("Notification")
+            navController.navigate("Notification/$settingParam")
         }) {
         Text("Go to Notification Screen")
        }
@@ -107,10 +107,10 @@ fun SettingsScreen(navController: NavController , postViewModel: PostViewModel) 
 
 // Third Screen and it's components
 @Composable
-fun NotificationScreen(navController: NavController, modifier: Modifier = Modifier)  {
+fun NotificationScreen(navController: NavController, notificationParam: String)  {
     Column {
 
-        Text("Notification Screen")
+        Text("Notification Screen $notificationParam")
 
         Spacer(modifier = Modifier.fillMaxWidth())
 
@@ -133,12 +133,19 @@ fun App( modifier: Modifier = Modifier , countryViewModel: CountryViewModel , po
             ProfileScreen(navController, modifier, countryViewModel)
         }
 
-        composable("Settings") {
-            SettingsScreen(navController , postViewModel)
+        composable("Settings/{settingParam}") { backStackEntry ->
+            val settingsId = backStackEntry.arguments?.getString("settingParam")
+            if (settingsId != null) {
+                SettingsScreen(navController , postViewModel , settingsId)
+            }
         }
 
-        composable("Notification") {
-            NotificationScreen(navController)
+        composable("Notification/{notificationParam}") {
+            backStackEntry ->
+            val notificationId = backStackEntry.arguments?.getString("notificationParam")
+            if (notificationId != null) {
+                NotificationScreen(navController, notificationId)
+            }
         }
 
     }
