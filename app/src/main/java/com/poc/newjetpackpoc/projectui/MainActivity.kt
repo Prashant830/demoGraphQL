@@ -9,6 +9,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.newjetpackpoc.ui.theme.NewJetpackPocTheme
 import com.poc.newjetpackpoc.projectui.navigationgraph.App
+import com.poc.newjetpackpoc.projectui.viewModels.CountryViewModel
+import com.poc.newjetpackpoc.projectui.viewModels.PostViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {

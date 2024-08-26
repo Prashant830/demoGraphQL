@@ -1,4 +1,4 @@
-package com.poc.newjetpackpoc.projectui
+package com.poc.newjetpackpoc.projectui.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.poc.CountryQuery
-import com.poc.newjetpackpoc.projectui.CountryViewModel
-import com.poc.newjetpackpoc.projectui.PostViewModel
+import com.poc.newjetpackpoc.projectui.viewModels.CountryViewModel
+import com.poc.newjetpackpoc.projectui.viewModels.PostViewModel
 
 // first Screen and it's components
 @Composable

@@ -2,9 +2,9 @@ package com.poc.newjetpackpoc.di
 
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.network.okHttpClient
-import com.poc.newjetpackpoc.projectui.CountryViewModel
+import com.poc.newjetpackpoc.projectui.viewModels.CountryViewModel
 import com.poc.newjetpackpoc.networklayer.Repository
-import com.poc.newjetpackpoc.projectui.PostViewModel
+import com.poc.newjetpackpoc.projectui.viewModels.PostViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.module.dsl.viewModel
