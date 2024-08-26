@@ -15,17 +15,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 private const val BASE_URL = "https://countries.trevorblades.com/graphql"
 private const val BASE_URL_TWO = "https://jsonplaceholder.typicode.com"
 
-private var okHttp: OkHttpClient? = null
-
 
 // login interceptor declaration
 fun loginInterceptor() : HttpLoggingInterceptor{
+
     val loggingInterceptor = HttpLoggingInterceptor()
     loggingInterceptor.level = (HttpLoggingInterceptor.Level.BODY)
-
-    okHttp = OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor)
-        .build()
 
     return loggingInterceptor
 }
